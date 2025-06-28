@@ -43,7 +43,7 @@ asdf install sqlcmd latest
 asdf global sqlcmd latest
 
 # Now sqlcmd commands are available
-sqlcmd --version
+sqlcmd -?
 ```
 
 Check [asdf](https://github.com/asdf-vm/asdf) readme for more instructions on how to
