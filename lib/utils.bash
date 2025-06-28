@@ -3,9 +3,9 @@
 set -euo pipefail
 
 # TODO: Ensure this is the correct GitHub homepage where releases can be downloaded for sqlcmd.
-GH_REPO="https://github.com/ahyalfan/sqlcmd"
+GH_REPO="https://github.com/microsoft/go-sqlcmd"
 TOOL_NAME="sqlcmd"
-TOOL_TEST="sqlcmd --version"
+TOOL_TEST="sqlcmd version"
 
 fail() {
 	echo -e "asdf-$TOOL_NAME: $*"
@@ -42,10 +42,22 @@ download_release() {
 	filename="$2"
 
 	# TODO: Adapt the release URL convention for sqlcmd
-	url="$GH_REPO/archive/v${version}.tar.gz"
+	local os arch file url
+
+	os="linux"
+
+	arch="$(uname -m)"
+	case "$arch" in
+	x86_64) arch="amd64" ;;
+	aarch64) arch="arm64" ;;
+	*) fail "Unsupported arch: $arch" ;;
+	esac
+
+	file="sqlcmd-v${version}-${os}-${arch}.tar.bz2"
+	url="https://github.com/microsoft/go-sqlcmd/releases/download/v${version}/${file}"
 
 	echo "* Downloading $TOOL_NAME release $version..."
-	curl "${curl_opts[@]}" -o "$filename" -C - "$url" || fail "Could not download $url"
+	curl "${curl_opts[@]}" -L -o "$filename" -C - "$url" || fail "Could not download $url"
 }
 
 install_version() {
