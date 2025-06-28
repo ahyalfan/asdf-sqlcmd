@@ -37,13 +37,13 @@ sqlcmd:
 asdf list-all sqlcmd
 
 # Install specific version
-asdf install sqlcmd latest
+asdf install sqlcmd 1.8.0
 
 # Set a version globally (on your ~/.tool-versions file)
-asdf global sqlcmd latest
+asdf set sqlcmd 1.8.0
 
 # Now sqlcmd commands are available
-sqlcmd -?
+sqlcmd --version
 ```
 
 Check [asdf](https://github.com/asdf-vm/asdf) readme for more instructions on how to
