@@ -53,7 +53,7 @@ download_release() {
 	*) fail "Unsupported arch: $arch" ;;
 	esac
 
-	file="sqlcmd-v${version}-${os}-${arch}.tar.bz2"
+	file="sqlcmd-${os}-${arch}.tar.bz2"
 	url="https://github.com/microsoft/go-sqlcmd/releases/download/v${version}/${file}"
 
 	echo "* Downloading $TOOL_NAME release $version..."
